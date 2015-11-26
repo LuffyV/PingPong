@@ -1,0 +1,67 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Game</title>
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/tema.css">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="js/funciones.js"></script>
+</head>
+<body onload="onLoad()">
+	<section data-role="page" id="setup">
+        <header data-role="header" data-position="fixed" stlye="overflow:hidden;">
+        	<h2>Setting Up</h2>
+            <a href="index.html" data-icon="back" class="ui-btn-left">Back</a>
+        </header>
+
+		<div role="main" class="ui-content">
+			<fieldset data-role="controlgroup">
+  				<input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" checked="checked">
+  				<label for="radio-choice-1">2 players</label>
+ 
+  				<input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2">
+  				<label for="radio-choice-2">4 players</label>
+			</fieldset>
+
+			<div id="player_number">
+				<p style="text-align:center">Select all players' names</p>
+				<input type="text" placeholder="Player 1 Name" id="player1_name">
+				<input type="text" placeholder="Player 2 Name" id="player2_name">
+				<input type="text" placeholder="Player 3 Name" id="player3_name">
+				<input type="text" placeholder="Player 4 Name" id="player4_name">
+			</div>
+			<a class="ui-btn ui-corner-all" href="#game" rel="external">Start Game</a>
+		</div>
+	</section>
+
+    <section data-role="page" id="game">
+        <header data-role="header" data-position="fixed" stlye="overflow:hidden;">
+        	<h2>Game On!</h2>
+            <a data-icon="delete" class="ui-btn-right" data-rel="popup" href="#options" data-transition="pop">Cancel</a>
+        </header>
+
+        <div role="main" class="ui-content">
+            <div id="score">
+                <label id="team1_score" style="display:inline-block; float: left; ">0</label>
+                <label id="team2_score" style="display:inline-block; float: right;">0</label>
+            </div>
+            <br><br>
+            <div id="acciones">
+                <button data-role="button" onclick="reiniciarPuntos();">Reiniciar puntos</button>
+            </div>
+
+        </div>
+
+        <div data-role="popup" id="options">
+            <h3>Sure?</h3>
+            <a href="index.html" data-role="button" data-inline="true" data-mini="true">Yes</a>
+            <a href="#game" data-role="button" data-inline="true" data-mini="true">No</a>
+        </div>
+    </section>
+</body>
+</html>

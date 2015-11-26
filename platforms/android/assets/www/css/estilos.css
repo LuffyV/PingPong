@@ -1,0 +1,53 @@
+body {
+	background-color: #6699FF;
+}
+
+header {
+	text-align: center;
+	color: white;
+	height: 50px;
+	width: 100%;
+	background-color: black;
+}
+
+h2 {
+	margin-bottom: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: red;
+}
+
+img {
+	width: 225px;
+	height: 225px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#matches_a{
+	margin-right: 10px;
+	float: right;
+}
+
+#players_a{
+	margin-left: 10px;
+	float: left;
+}
+
+#nuevo_juego {
+	text-align: center;
+	margin: 0 auto;
+    border: 3px solid #a1a1a1;
+    padding: 10px 0px; 
+    background: #dddddd;
+    width: 150px;
+    border-radius: 25px;
+	border: 1px solid transparent;
+}
+
+#nuevo_juego:hover{
+	border: 1px solid red;
+}
