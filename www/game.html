@@ -12,7 +12,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" src="js/funciones.js"></script>
 </head>
-<body onload="onLoad()">
+<body>
 	<section data-role="page" id="setup">
         <header data-role="header" data-position="fixed" stlye="overflow:hidden;">
         	<h2>Setting Up</h2>
@@ -22,20 +22,20 @@
 		<div role="main" class="ui-content">
 			<fieldset data-role="controlgroup">
   				<input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" checked="checked">
-  				<label for="radio-choice-1">2 players</label>
+  				<label for="radio-choice-1">4 players</label>
  
   				<input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2">
-  				<label for="radio-choice-2">4 players</label>
+  				<label for="radio-choice-2">2 players</label>
 			</fieldset>
 
 			<div id="player_number">
 				<p style="text-align:center">Select all players' names</p>
-				<input type="text" placeholder="Player 1 Name" id="player1_name">
-				<input type="text" placeholder="Player 2 Name" id="player2_name">
-				<input type="text" placeholder="Player 3 Name" id="player3_name">
-				<input type="text" placeholder="Player 4 Name" id="player4_name">
+				<input type="text" placeholder="Player 1 Name" id="player1_nameInput">
+				<input type="text" placeholder="Player 2 Name" id="player2_nameInput">
+				<input type="text" placeholder="Player 3 Name" id="player3_nameInput">
+				<input type="text" placeholder="Player 4 Name" id="player4_nameInput">
 			</div>
-			<a class="ui-btn ui-corner-all" href="#game" rel="external">Start Game</a>
+			<a class="ui-btn ui-corner-all" href="#game" rel="external" onclick="onLoad()">Start Game</a>
 		</div>
 	</section>
 
@@ -46,15 +46,26 @@
         </header>
 
         <div role="main" class="ui-content">
-            <div id="score">
-                <label id="team1_score" style="display:inline-block; float: left; ">0</label>
-                <label id="team2_score" style="display:inline-block; float: right;">0</label>
+            <div id="equipo1" class="ui-content">
+                <h2 id="player1_name">P1</h2>
+                <h2 id="player2_name">P2</h2>
             </div>
-            <br><br>
+
+            <div id="score">
+                <h1 id="team1_score">0</h1>
+                <h1 id="team2_score">0</h1>
+            </div>
+
+            <div id="equipo2" class="ui-content">
+                <h2 id="player3_name">P3</h2>
+                <h2 id="player4_name">P4</h2>
+            </div>
+
+            <br>
+
             <div id="acciones">
                 <button data-role="button" onclick="reiniciarPuntos();">Reiniciar puntos</button>
             </div>
-
         </div>
 
         <div data-role="popup" id="options">

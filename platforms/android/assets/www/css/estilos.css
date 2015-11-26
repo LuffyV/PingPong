@@ -12,6 +12,7 @@ header {
 
 h2 {
 	margin-bottom: 0px;
+	margin-top: 0px;
 }
 
 a {
@@ -27,27 +28,32 @@ img {
     margin-right: auto;
 }
 
-#matches_a{
-	margin-right: 10px;
-	float: right;
-}
-
-#players_a{
-	margin-left: 10px;
+#team1_score {
+	display: inline-block;
 	float: left;
+	margin-left: 3em;
 }
 
-#nuevo_juego {
-	text-align: center;
-	margin: 0 auto;
-    border: 3px solid #a1a1a1;
-    padding: 10px 0px; 
-    background: #dddddd;
-    width: 150px;
-    border-radius: 25px;
-	border: 1px solid transparent;
+#team2_score {
+	display: inline-block;
+	float: right;
+	margin-right: 3em;
 }
 
-#nuevo_juego:hover{
-	border: 1px solid red;
+#player1_name, #player3_name {
+	display: inline;
+	float: left;
+	margin-left: 5px;
+}
+
+#player2_name, #player4_name {
+	display: inline;
+	float: right;
+	margin-right: 5px;
+}
+
+#equipo1, #equipo2 {
+	width: 85%;
+	height: 15%;
+	border: 3px solid black;
 }
