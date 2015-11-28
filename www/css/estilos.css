@@ -28,25 +28,35 @@ img {
     margin-right: auto;
 }
 
-#team1_score {
+#equipo1 {
+	background-color: red;
+}
+
+#equipo2 {
+	background-color: blue;
+}
+
+#team1_score, #team1_scoreDoubles {
+	color: red;
 	display: inline-block;
 	float: left;
 	margin-left: 3em;
 }
 
-#team2_score {
+#team2_score, #team2_scoreDoubles {
+	color: blue;
 	display: inline-block;
 	float: right;
 	margin-right: 3em;
 }
 
-#player1_name, #player3_name {
+#player1_name, #player3_name, #player1_nameDoubles, #player3_nameDoubles {
 	display: inline;
 	float: left;
 	margin-left: 5px;
 }
 
-#player2_name, #player4_name {
+#player2_name, #player4_name, #player2_nameDoubles, #player4_nameDoubles {
 	display: inline;
 	float: right;
 	margin-right: 5px;
