@@ -20,7 +20,7 @@ a {
 	color: red;
 }
 
-img {
+.indexicon {
 	width: 225px;
 	height: 225px;
 	display: block;
@@ -28,12 +28,28 @@ img {
     margin-right: auto;
 }
 
+.pointleftbutton {
+	display: inline;
+	float: left;
+	margin-left: 3em;
+}
+
+.pointrightbutton {
+	display: inline;
+	float: right;
+	margin-right: 3em;
+}
+
+#acciones {
+	padding-top: 5em;
+}
+
 #equipo1, #equipo1Doubles {
-	background-color: red;
+	background-color: #cc0000;
 }
 
 #equipo2, #equipo2Doubles {
-	background-color: blue;
+	background-color: #6699ff;
 }
 
 #team1_score, #team1_scoreDoubles {

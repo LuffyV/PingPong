@@ -110,11 +110,42 @@ function mostrarTurno(){
         }
     }
 
+    // 1, 4, 2, 3
     if(numeroJugadores == 4){
-        document.getElementById("player1_nameDoubles").style.color = "black";
-        document.getElementById("player2_nameDoubles").style.color = "black";
-        document.getElementById("player3_nameDoubles").style.color = "black";
-        document.getElementById("player4_nameDoubles").style.color = "black";
+        if(saques < 2){
+            saques++;
+            document.getElementById("player1_nameDoubles").style.color = "white";
+            document.getElementById("player2_nameDoubles").style.color = "black";
+            document.getElementById("player3_nameDoubles").style.color = "black";
+            document.getElementById("player4_nameDoubles").style.color = "black";
+        } else {
+        if(saques >= 2 && saques < 4){
+            saques++;
+            document.getElementById("player1_nameDoubles").style.color = "black";
+            document.getElementById("player2_nameDoubles").style.color = "black";
+            document.getElementById("player3_nameDoubles").style.color = "black";
+            document.getElementById("player4_nameDoubles").style.color = "white";
+        } else {
+        if(saques >= 4 && saques < 6){
+            saques++;
+            document.getElementById("player1_nameDoubles").style.color = "black";
+            document.getElementById("player2_nameDoubles").style.color = "white";
+            document.getElementById("player3_nameDoubles").style.color = "black";
+            document.getElementById("player4_nameDoubles").style.color = "black";
+        } else {
+        if(saques >= 6){
+            saques++;
+            document.getElementById("player1_nameDoubles").style.color = "black";
+            document.getElementById("player2_nameDoubles").style.color = "black";
+            document.getElementById("player3_nameDoubles").style.color = "white";
+            document.getElementById("player4_nameDoubles").style.color = "black";
+            if(saques == 8){
+                saques = 0;
+            }
+        }            
+        }
+        }
+        }
     }
 }
 
@@ -148,6 +179,7 @@ function reiniciarPuntos(){
 	document.getElementById("team2_score").innerHTML = 0;
     document.getElementById("team1_scoreDoubles").innerHTML = 0;
     document.getElementById("team2_scoreDoubles").innerHTML = 0;
+    mostrarTurno();
     cargarEstilosDefault();
 }
 
