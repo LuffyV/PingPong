@@ -1,10 +1,10 @@
 var team1_score;
 var team2_score;
-var puntosTotales = team1_score + team2_score; // para ir calculando y mostrar a quién le toca sacar
 var turnoSaque;
 var ultimoPuntoAnotado;
 var juegoTerminado;
 var numeroJugadores;
+var saques = 0;
 
 $(document).ready(function() {
     $("input[type='radio']").bind("change", function(event, ui) {
@@ -22,7 +22,6 @@ $(document).ready(function() {
 
 // ---- EVENTOS ----
 function start() {
-    alert("Entra al start");
     document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
     document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
     document.addEventListener("backbutton", onBackKeyDown, false);
@@ -80,7 +79,9 @@ function onBackKeyDown() {
 }
 
 function revisarPuntos(){
-    mostrarTurno();
+    if(!juegoTerminado){
+        mostrarTurno();
+    }
     if(team1_score >= 11 || team2_score >= 11){
         if(Math.abs(team1_score - team2_score) >= 2){
             alert("Se ha terminado el juego");
@@ -91,26 +92,48 @@ function revisarPuntos(){
 }
 
 function mostrarTurno(){
-    // que se pinte de rojo el nombre del jugador al que le toca sacar
-    // cada 2 puntosTotales todo se pinta de negro y se pinta de rojo el siguiente
+    // que se pinte de blanco el nombre del que le toca
+    if(numeroJugadores == 2){
+        if(saques < 2){
+            saques++;
+            document.getElementById("player1_name").style.color = "white";
+            document.getElementById("player2_name").style.color = "black";
+        } else {
+            if(saques >= 2){
+                saques++;
+                document.getElementById("player2_name").style.color = "white";
+                document.getElementById("player1_name").style.color = "black";
+                if(saques == 4){
+                    saques = 0;
+                }
+            }
+        }
+    }
+
+    if(numeroJugadores == 4){
+        document.getElementById("player1_nameDoubles").style.color = "black";
+        document.getElementById("player2_nameDoubles").style.color = "black";
+        document.getElementById("player3_nameDoubles").style.color = "black";
+        document.getElementById("player4_nameDoubles").style.color = "black";
+    }
 }
 
 function mostrarGanador(){
     if(team1_score > team2_score){
         if(numeroJugadores == 2){
-            document.getElementById("team1_score").style.color = "green";
-            document.getElementById("equipo1").style.backgroundColor = "green";
+            document.getElementById("team1_score").style.color = "#009900";
+            document.getElementById("equipo1").style.backgroundColor = "#009900";
         } else {
-            document.getElementById("team1_scoreDoubles").style.color = "green";
-            document.getElementById("equipo1").style.backgroundColor = "green";
+            document.getElementById("team1_scoreDoubles").style.color = "#009900";
+            document.getElementById("equipo1Doubles").style.backgroundColor = "#009900";
         }
     } else {
         if(numeroJugadores == 2){
-        document.getElementById("team2_score").style.color = "green";
-        document.getElementById("equipo2").style.backgroundColor = "green";
+        document.getElementById("team2_score").style.color = "#009900";
+        document.getElementById("equipo2").style.backgroundColor = "#009900";
         } else {
-        document.getElementById("team2_scoreDoubles").style.color = "green";
-        document.getElementById("equipo2").style.backgroundColor = "green";            
+        document.getElementById("team2_scoreDoubles").style.color = "#009900";
+        document.getElementById("equipo2Doubles").style.backgroundColor = "#009900";            
         }
     }
 }
@@ -120,6 +143,7 @@ function reiniciarPuntos(){
     team2_score = 0;
     juegoTerminado = false;
     ultimoPuntoAnotado = 0;
+    saques = 0;
 	document.getElementById("team1_score").innerHTML = 0;
 	document.getElementById("team2_score").innerHTML = 0;
     document.getElementById("team1_scoreDoubles").innerHTML = 0;
@@ -128,17 +152,18 @@ function reiniciarPuntos(){
 }
 
 function cargarEstilosDefault(){
-    document.getElementById("team1_score").style.color = "red";
-    document.getElementById("team2_score").style.color = "blue";
-    document.getElementById("team1_scoreDoubles").style.color = "red";
-    document.getElementById("team2_scoreDoubles").style.color = "blue";
+    document.getElementById("team1_score").style.color = "#cc0000";
+    document.getElementById("team2_score").style.color = "#6699ff";
+    document.getElementById("team1_scoreDoubles").style.color = "#cc0000";
+    document.getElementById("team2_scoreDoubles").style.color = "#6699ff";
 
-    document.getElementById("equipo1").style.backgroundColor = "red";
-    document.getElementById("equipo2").style.backgroundColor = "blue";
+    document.getElementById("equipo1").style.backgroundColor = "#cc0000";
+    document.getElementById("equipo2").style.backgroundColor = "#6699ff";
+    document.getElementById("equipo1Doubles").style.backgroundColor = "#cc0000";
+    document.getElementById("equipo2Doubles").style.backgroundColor = "#6699ff";
 }
 
 function cargarNombresJugadores(){
-    alert("Entra a cargarNombresJugadores");
     if(numeroJugadores == 2){
         document.getElementById("player1_name").innerHTML = localStorage.player1;
         document.getElementById("player2_name").innerHTML = localStorage.player2;
@@ -152,13 +177,16 @@ function cargarNombresJugadores(){
 }
 
 function saveNames(){
-    alert("Entra a saveNames");
-    localStorage.player1 = "";
-    localStorage.player2 = "";
-    localStorage.player3 = "";
-    localStorage.player4 = "";
+    localStorage.player1 = "P1";
+    localStorage.player2 = "P2";
+    localStorage.player3 = "P3";
+    localStorage.player4 = "P4";
 
-    if($("#player3_nameInput").val() == "" && $("#player4_nameInput").val() == ""){
+    var tipoJuego = $("#jugadores :radio:checked").val();
+
+    // if($("#player3_nameInput").val() == "" && $("#player4_nameInput").val() == ""){
+
+    if(tipoJuego == 2){
         localStorage.player1 = $("#player1_nameInput").val();
         localStorage.player2 = $("#player2_nameInput").val();
         numeroJugadores = 2;

@@ -47,7 +47,7 @@
             <a data-icon="delete" class="ui-btn-right" data-rel="popup" href="#options" data-transition="pop">Cancel</a>
         </header>
 
-        <div role="main" class="ui-content">
+        <div id="mesa" role="main" class="ui-content">
             <div id="equipo1" class="ui-content">
                 <h2 id="player1_name">P1</h2>
             </div>
@@ -60,13 +60,13 @@
             <div id="equipo2" class="ui-content">
                 <h2 id="player2_name">P2</h2>
             </div>
+        </div>
 
             <br>
-
             <div id="acciones">
                 <button data-role="button" onclick="reiniciarPuntos();">Reiniciar puntos</button>
+                <button data-role="button">Terminar y Guardar</button>
             </div>
-        </div>
 
         <div data-role="popup" id="options">
             <h3>Sure?</h3>
@@ -82,8 +82,8 @@
             <a data-icon="delete" class="ui-btn-right" data-rel="popup" href="#optionsDoubles" data-transition="pop">Cancel</a>
         </header>
 
-        <div role="main" class="ui-content">
-            <div id="equipo1" class="ui-content">
+        <div id="mesa" role="main" class="ui-content">
+            <div id="equipo1Doubles" class="ui-content">
                 <h2 id="player1_nameDoubles">P1</h2>
                 <h2 id="player2_nameDoubles">P2</h2>
             </div>
@@ -93,17 +93,18 @@
                 <h1 id="team2_scoreDoubles">0</h1>
             </div>
 
-            <div id="equipo2" class="ui-content">
+            <div id="equipo2Doubles" class="ui-content">
                 <h2 id="player3_nameDoubles">P3</h2>
                 <h2 id="player4_nameDoubles">P4</h2>
             </div>
+        </div>
 
             <br>
 
             <div id="acciones">
                 <button data-role="button" onclick="reiniciarPuntos();">Reiniciar puntos</button>
+                <button data-role="button">Terminar y Guardar</button>
             </div>
-        </div>
 
         <div data-role="popup" id="optionsDoubles">
             <h3>Sure?</h3>

@@ -28,11 +28,11 @@ img {
     margin-right: auto;
 }
 
-#equipo1 {
+#equipo1, #equipo1Doubles {
 	background-color: red;
 }
 
-#equipo2 {
+#equipo2, #equipo2Doubles {
 	background-color: blue;
 }
 
@@ -62,8 +62,15 @@ img {
 	margin-right: 5px;
 }
 
-#equipo1, #equipo2 {
+#equipo1, #equipo2, #equipo1Doubles, #equipo2Doubles {
 	width: 85%;
-	height: 15%;
+	height: 25%;
 	border: 3px solid black;
+}
+
+#mesa {
+	height: 75%;
+	background-image: url("../img/table.png");
+	background-repeat:no-repeat;
+	background-size: 100% 100%;
 }
