@@ -84,7 +84,10 @@ function revisarPuntos(){
     }
     if(team1_score >= 11 || team2_score >= 11){
         if(Math.abs(team1_score - team2_score) >= 2){
-            alert("Se ha terminado el juego");
+            vibrate();
+            playBeep();
+            showAlert();
+
             juegoTerminado = true;
             mostrarGanador();
         }
@@ -232,4 +235,31 @@ function saveNames(){
         window.location.href = "game.html#GameDoubles";
     }
     start();
+}
+
+function alertDismissed() {
+    // do something
+}
+
+// Show a custom alert
+//
+function showAlert() {
+    navigator.notification.alert(
+        'Se ha terminado el juego!',  // message
+        alertDismissed,         // callback
+        'Game Over',            // title
+        'Done'                  // buttonName
+    );
+}
+
+// Beep two times
+//
+function playBeep() {
+    navigator.notification.beep(2);
+}
+
+    // Vibrate for 2 seconds
+    //
+function vibrate() {
+    navigator.notification.vibrate(1000);
 }
