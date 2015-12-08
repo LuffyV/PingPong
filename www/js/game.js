@@ -6,6 +6,9 @@ var juegoTerminado;
 var numeroJugadores;
 var saques = 0;
 
+var ganador;
+var db;
+
 $(document).ready(function() {
     $("input[type='radio']").bind("change", function(event, ui) {
         $("input[type='radio']").checkboxradio("refresh");
@@ -27,6 +30,8 @@ function start() {
     document.addEventListener("backbutton", onBackKeyDown, false);
     reiniciarPuntos();
     cargarNombresJugadores();
+    connectionReady(); // carga la base de datos de las partidas
+    startAccelerometer();
 }
 
 function onVolumeUpKeyDown(){
@@ -76,6 +81,41 @@ function onBackKeyDown() {
     ultimoPuntoAnotado = 0;
     juegoTerminado = false;
     cargarEstilosDefault();
+}
+
+function saveNames(){
+    var tipoJuego = $("#jugadores :radio:checked").val();
+
+    if($("#player1_nameInput").val() == ""){
+        localStorage.player1 = "P1";
+    } else {
+        localStorage.player1 = $("#player1_nameInput").val();
+    }
+    if($("#player2_nameInput").val() == ""){
+        localStorage.player2 = "P2";
+    } else {
+        localStorage.player2 = $("#player2_nameInput").val();
+    }    
+
+    if(tipoJuego == 2){
+        numeroJugadores = 2;
+        window.location.href = "game.html#GameSingles";
+    } else {
+        // si son 4 jugadores, igual checa p3 y p4
+        if($("#player3_nameInput").val() == ""){
+            localStorage.player3 = "P3";
+        } else {
+            localStorage.player3 = $("#player3_nameInput").val();
+        }
+        if($("#player4_nameInput").val() == ""){
+            localStorage.player4 = "P4";
+        } else {
+            localStorage.player4 = $("#player4_nameInput").val();
+        }
+        numeroJugadores = 4;
+        window.location.href = "game.html#GameDoubles";
+    }
+    start();
 }
 
 function revisarPuntos(){
@@ -211,44 +251,18 @@ function cargarNombresJugadores(){
     }
 }
 
-function saveNames(){
-    var tipoJuego = $("#jugadores :radio:checked").val();
-
-    if($("#player1_nameInput").val() == ""){
-        localStorage.player1 = "P1";
-    } else {
-        localStorage.player1 = $("#player1_nameInput").val();
-    }
-    if($("#player2_nameInput").val() == ""){
-        localStorage.player2 = "P2";
-    } else {
-        localStorage.player2 = $("#player2_nameInput").val();
-    }    
-
-    if(tipoJuego == 2){
-        numeroJugadores = 2;
-        window.location.href = "game.html#GameSingles";
-    } else {
-        // si son 4 jugadores, igual checa p3 y p4
-        if($("#player3_nameInput").val() == ""){
-            localStorage.player3 = "P3";
-        } else {
-            localStorage.player3 = $("#player3_nameInput").val();
-        }
-        if($("#player4_nameInput").val() == ""){
-            localStorage.player4 = "P4";
-        } else {
-            localStorage.player4 = $("#player4_nameInput").val();
-        }
-        numeroJugadores = 4;
-        window.location.href = "game.html#GameDoubles";
-    }
-    start();
-}
-
 function saveSingles(){
     if(juegoTerminado){
-
+        if(team1_score > team2_score){
+            ganador = localStorage.player1;
+        } else {
+            ganador = localStorage.player2;
+        }
+        db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
+        db.transaction(function(tx){
+            tx.executeSql('INSERT INTO matchsingle (id,p1Name,p2Name,p1Score,p2Score,winner) VALUES (NULL,?,?,?,?,?)',[localStorage.player1, localStorage.player2, team1_score, team2_score,ganador]);
+        }, errorDB);
+        alert("Success. Se ha agregado el juego de singles");
     } else {
         alert("El juego aún no termina!");
     }
@@ -260,6 +274,10 @@ function saveDoubles(){
     } else {
         alert("El juego aún no termina!");
     }
+}
+
+function errorDB(err){
+    alert("Error processing SQL: " + err.code + ", " + err.message);
 }
 
 function alertDismissed() {
@@ -287,4 +305,16 @@ function playBeep() {
     //
 function vibrate() {
     navigator.notification.vibrate(1000);
+}
+
+function connectionReady() {
+    alert("connectionReady");
+    db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
+    db.transaction(function(tx){
+        tx.executeSql('CREATE TABLE IF NOT EXISTS matchsingle(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, p1Name,p2Name,p1Score,p2Score,winner)');
+    }, errorDB);
+}
+
+function errorDB(err){
+    alert("Error processing SQL: " + err.code + ", " + err.message);
 }

@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html >
 <head>
     <meta charset="utf-8">
 	<title>Players</title>
@@ -11,8 +11,22 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="js/database.js"></script>
+    <style>
+        .winsLabel{
+            color:green;
+
+        }
+        .lossLabel{
+            color: red;
+        }
+       strong{
+          font-size: 16px;
+        }
+    </style>
 </head>
 <body>
+
 	<section data-role="page" id="players">
         <header data-role="header" data-position="fixed" stlye="overflow:hidden;">
             <h2>Saved Players</h2>
@@ -20,9 +34,13 @@
             <a href="#addPlayer" data-icon="plus" class="ui-btn-left" rel="external">Add</a>
         </header>
 
-        <div role="main" class="ui-content">
 
+        <div role="main" class="content">
+           <ul data-role="listview" id="list">
+
+           </ul>
         </div>
+
 	</section>
 
 	<section data-role="page" id="addPlayer">
@@ -32,8 +50,28 @@
         </header>
 
         <div role="main" class="ui-content">
+            <form onsubmit="createPlayer();">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" required>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" name="phone" id="phone" required/>
 
+                    <img src="img/default_profile_icon.png" style="margin-left: auto;margin-right: auto;display: block;width: 320px;height: 240px;" id="imagePlayer" alt="run"/>
+                        <div style="position: relative; left: 35%; margin-top: 1.2em;">
+                            <a href="#options" class="ui-btn-icon-right" data-role="button" data-icon="camera" data-rel="popup" data-transition="pop" data-inline="true" data-theme="c">Link button</a>
+                        </div>
+                </div>
+                    <input type="submit" data-mini="true" value="Save Player">
+                    <input type="submit" data-mini="true" value="Save as Contact">
+            </form>
+        </div>
 
+        <div data-role="popup" id="options" data-overlay-theme="b" data-theme="b"style="max-width:400px;">
+            <h3>Cambiar Imagen</h3>
+            <p>Selecciona el origen de la imagen:</p>
+            <a href="#" data-role="button" data-rel="back" data-icon="camera" data-inline="true" data-mini="true" onclick="capturePhoto();">CAMERA</a>
+            <a href="#" data-role="button" data-rel="back" data-icon="navigation" data-inline="true" data-mini="true" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Libreria</a>
         </div>
 	</section>
 </body>
