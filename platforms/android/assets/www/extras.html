@@ -11,15 +11,46 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/extras.js"></script>
 </head>
 <body>
-	<section data-role="page">
+	<section data-role="page" id="extras">
         <header data-role="header" data-position="fixed" stlye="overflow:hidden;">
         	<h2>Extras</h2>
             <a href="index.html" data-icon="back" class="ui-btn-left">Back</a>
         </header>
+        <br>
+        <img class="img_extras" src="img/extras.jpg" border="3">
+        <br><br>
+        <a href="#how_to_play" class="ui-btn ui-corner-all" rel="external">How to Play</a>
+        <button class="ui-btn ui-corner-all" onclick="borrarDB();">Restart Data</button>
+    </section>
 
-        <button data-role="button" onclick="">How To Play</button>
+    <section data-role="page" id="how_to_play">
+        <header data-role="header" data-position="fixed" stlye="overflow:hidden;">
+            <h2>How to Play</h2>
+            <a href="#extras" data-icon="back" class="ui-btn-left">Back</a>
+        </header>
+        <div data-role="tabs" id="tabs">
+            <div data-role="navbar">
+                <ul>
+                <li><a href="#one" data-ajax="false">App</a></li>
+                <li><a href="#two" data-ajax="false">Reglas</a></li>
+                </ul>
+            </div>
+            <div id="one" class="ui-content">
+                <h1 align="center">Cómo usar la aplicación</h1>
+            </div>
+            <div id="two" class="ui-content">
+                <h1 align="center">Reglas</h1>
+                <li>En una partida, el primer jugador en llegar a 11 puntos gana, sin embargo, el juego debe ganarse por un margen de al menos 2 puntos.</h>
+                <li>El jugador que saca va cambiando cada 2 puntos.</li>
+                <li>Si al sacar, la pelota toca la red o se sale de la cancha antes de tocar el lado del oponente, se cuenta como un mal saque.</li>
+                <li>Dos mal saques consecutivos equivalen a un punto para el contrincante.</li>
+                <li>Apoyarse de la superficie de la mesa con las manos equivale a un punto para el contrincante.</li>
+                <li>Los bordes blancos de la mesa son legales pero no los lados.</li>
+            </div>
+        </div>
     </section>
 </body>
 </html>
