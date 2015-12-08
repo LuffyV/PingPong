@@ -11,6 +11,7 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/extras.js"></script>
 </head>
 <body>
 	<section data-role="page" id="extras">
@@ -18,8 +19,11 @@
         	<h2>Extras</h2>
             <a href="index.html" data-icon="back" class="ui-btn-left">Back</a>
         </header>
-
+        <br>
+        <img class="img_extras" src="img/extras.jpg" border="3">
+        <br><br>
         <a href="#how_to_play" class="ui-btn ui-corner-all" rel="external">How to Play</a>
+        <button class="ui-btn ui-corner-all" onclick="borrarDB();">Restart Data</button>
     </section>
 
     <section data-role="page" id="how_to_play">
@@ -43,7 +47,7 @@
                 <li>El jugador que saca va cambiando cada 2 puntos.</li>
                 <li>Si al sacar, la pelota toca la red o se sale de la cancha antes de tocar el lado del oponente, se cuenta como un mal saque.</li>
                 <li>Dos mal saques consecutivos equivalen a un punto para el contrincante.</li>
-                <li>Tocar la superficie de la mesa con las manos equivale a un punto para el contrincante.</li>
+                <li>Apoyarse de la superficie de la mesa con las manos equivale a un punto para el contrincante.</li>
                 <li>Los bordes blancos de la mesa son legales pero no los lados.</li>
             </div>
         </div>

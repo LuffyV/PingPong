@@ -70,7 +70,7 @@ function onBackKeyDown() {
         if(numeroJugadores == 2){
             document.getElementById("team2_score").innerHTML = team2_score;
         } else {
-            document.getElementById("team2_scoreDoubles").innerHTML = team1_score;
+            document.getElementById("team2_scoreDoubles").innerHTML = team2_score;
         }
     }
     ultimoPuntoAnotado = 0;
@@ -212,29 +212,54 @@ function cargarNombresJugadores(){
 }
 
 function saveNames(){
-    localStorage.player1 = "P1";
-    localStorage.player2 = "P2";
-    localStorage.player3 = "P3";
-    localStorage.player4 = "P4";
-
     var tipoJuego = $("#jugadores :radio:checked").val();
 
-    // if($("#player3_nameInput").val() == "" && $("#player4_nameInput").val() == ""){
+    if($("#player1_nameInput").val() == ""){
+        localStorage.player1 = "P1";
+    } else {
+        localStorage.player1 = $("#player1_nameInput").val();
+    }
+    if($("#player2_nameInput").val() == ""){
+        localStorage.player2 = "P2";
+    } else {
+        localStorage.player2 = $("#player2_nameInput").val();
+    }    
 
     if(tipoJuego == 2){
-        localStorage.player1 = $("#player1_nameInput").val();
-        localStorage.player2 = $("#player2_nameInput").val();
         numeroJugadores = 2;
         window.location.href = "game.html#GameSingles";
     } else {
-        localStorage.player1 = $("#player1_nameInput").val();
-        localStorage.player2 = $("#player2_nameInput").val();
-        localStorage.player3 = $("#player3_nameInput").val();
-        localStorage.player4 = $("#player4_nameInput").val();
+        // si son 4 jugadores, igual checa p3 y p4
+        if($("#player3_nameInput").val() == ""){
+            localStorage.player3 = "P3";
+        } else {
+            localStorage.player3 = $("#player3_nameInput").val();
+        }
+        if($("#player4_nameInput").val() == ""){
+            localStorage.player4 = "P4";
+        } else {
+            localStorage.player4 = $("#player4_nameInput").val();
+        }
         numeroJugadores = 4;
         window.location.href = "game.html#GameDoubles";
     }
     start();
+}
+
+function saveSingles(){
+    if(juegoTerminado){
+
+    } else {
+        alert("El juego aún no termina!");
+    }
+}
+
+function saveDoubles(){
+    if(juegoTerminado){
+
+    } else {
+        alert("El juego aún no termina!");
+    }
 }
 
 function alertDismissed() {
