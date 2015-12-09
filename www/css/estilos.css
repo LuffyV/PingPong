@@ -20,6 +20,16 @@ a {
 	color: red;
 }
 
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+tr {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
 .img_index {
 	width: 225px;
 	height: 225px;

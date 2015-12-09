@@ -265,6 +265,7 @@ function saveSingles(){
             tx.executeSql('INSERT INTO matchsingle (id,p1Name,p2Name,p1Score,p2Score,winner) VALUES (NULL,?,?,?,?,?)',[localStorage.player1, localStorage.player2, team1_score, team2_score,ganador]);
         }, errorDB);
         alert("Se ha agregado el juego de singles exitosamente.");
+        window.location.href = "index.html";
     } else {
         alert("El juego aún no termina!");
     }
@@ -284,6 +285,7 @@ function saveDoubles(){
             tx.executeSql('INSERT INTO matchdouble (id,p1Name,p2Name,p3Name,p4Name,t1Score,t2Score, winner1,winner2) VALUES (NULL,?,?,?,?,?,?,?,?)',[localStorage.player1, localStorage.player2, localStorage.player3, localStorage.player4, team1_score, team2_score, winner1, winner2]);
         }, errorDB);
         alert("Se ha agregado el juego de doubles exitosamente");
+        window.location.href = "index.html";
     } else {
         alert("El juego aún no termina!");
     }

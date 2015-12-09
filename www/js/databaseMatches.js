@@ -23,9 +23,9 @@ function showSingleMatches(){
             var size = results.rows.length;
             for(var i=0; i<size; i++){
                 var item = results.rows.item(i);
-                var element = $('<li>'+ item.p1Name + ' ' + item.p1Score + '-' + item.p2Score + ' ' + item.p2Name + '</li>');
-                var ul = $('#listSingle');
-                ul.append(element);
+                var element = $('<tr><th>'+item.p1Name+'</th><th>'+ item.p1Score+' - '+item.p2Score+'</th><th>'+item.p2Name+'</th></tr>');
+                var table = $('#listSingle');
+                table.append(element);
             }
         }, errorDB);
     }, errorDB);
@@ -37,9 +37,9 @@ function showDoubleMatches(){
             var size = results.rows.length;
             for(var i=0; i<size; i++){
                 var item = results.rows.item(i);
-                var element = $('<li>'+ item.p1Name + '/' + item.p2Name + ' ' + item.t1Score + '-' + item.t2Score + ' ' +  item.p3Name + '/' + item.p4Name +'</li>');
-                var ul = $('#listDouble');
-                ul.append(element);
+                var element = $('<tr><th>'+item.p1Name+'/'+item.p2Name +'</th><th>'+item.t1Score+' - '+item.t2Score + '</th><th>' + item.p3Name+'/'+item.p4Name +'</th></tr>');
+                var table = $('#listDouble');
+                table.append(element);
             }
         }, errorDB);
     }, errorDB);
