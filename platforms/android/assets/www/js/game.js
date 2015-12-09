@@ -6,8 +6,10 @@ var juegoTerminado;
 var numeroJugadores;
 var saques = 0;
 
-var ganador;
 var db;
+var ganador; // en singles
+var winner1; // en doubles
+var winner2;
 
 $(document).ready(function() {
     $("input[type='radio']").bind("change", function(event, ui) {
@@ -31,6 +33,7 @@ function start() {
     reiniciarPuntos();
     cargarNombresJugadores();
     connectionReady(); // carga la base de datos de las partidas
+    startAccelerometer();
 }
 
 function onVolumeUpKeyDown(){
@@ -261,7 +264,7 @@ function saveSingles(){
         db.transaction(function(tx){
             tx.executeSql('INSERT INTO matchsingle (id,p1Name,p2Name,p1Score,p2Score,winner) VALUES (NULL,?,?,?,?,?)',[localStorage.player1, localStorage.player2, team1_score, team2_score,ganador]);
         }, errorDB);
-        alert("Success. Se ha agregado el juego de singles");
+        alert("Se ha agregado el juego de singles exitosamente.");
     } else {
         alert("El juego aún no termina!");
     }
@@ -269,7 +272,18 @@ function saveSingles(){
 
 function saveDoubles(){
     if(juegoTerminado){
-
+        if(team1_score > team2_score){
+            winner1 = localStorage.player1;
+            winner2 = localStorage.player2;   
+        } else {
+            winner1 = localStorage.player3;
+            winner2 = localStorage.player4;
+        }
+        db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
+        db.transaction(function(tx){
+            tx.executeSql('INSERT INTO matchdouble (id,p1Name,p2Name,p3Name,p4Name,t1Score,t2Score, winner1,winner2) VALUES (NULL,?,?,?,?,?,?,?,?)',[localStorage.player1, localStorage.player2, localStorage.player3, localStorage.player4, team1_score, team2_score, winner1, winner2]);
+        }, errorDB);
+        alert("Se ha agregado el juego de doubles exitosamente");
     } else {
         alert("El juego aún no termina!");
     }
@@ -307,7 +321,6 @@ function vibrate() {
 }
 
 function connectionReady() {
-    alert("connectionReady");
     db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
     db.transaction(function(tx){
         tx.executeSql('CREATE TABLE IF NOT EXISTS matchsingle(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, p1Name,p2Name,p1Score,p2Score,winner)');

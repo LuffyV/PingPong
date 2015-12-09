@@ -19,13 +19,25 @@
         	<h2>Past Matches</h2>
             <a href="index.html" data-icon="back" class="ui-btn-left">Menu</a>
         </header>
-        
-        <div role="main" class="content">
-           <ul data-role="listview" id="list">
+        <div data-role="tabs" id="tabs">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#one" data-ajax="false">Singles</a></li>
+                    <li><a href="#two" data-ajax="false">Doubles</a></li>
+                </ul>
+            </div>
 
-           </ul>
+            <div id="one" class="ui-content">
+                <ul data-role="listview" id="listSingle">
+                    <!-- Lista de Partidas en singles-->
+                </ul>
+            </div>
+            <div id="two" class="ui-content">
+                <ul data-role="listview" id="listDouble">
+                    <!-- Lista de Partidas en dobles-->
+                </ul>    
+            </div>
         </div>
-
 	</section>
 </body>
 </html>
