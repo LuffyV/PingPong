@@ -12,7 +12,7 @@ function connectionReady() {
         tx.executeSql('CREATE TABLE IF NOT EXISTS player (id INTEGER PRIMARY KEY AUTOINCREMENT, name, phone, wins, loses, picture)');
 
     }, errorDB);
-
+    initCamara();
     showPlayers();
 }
 

@@ -12,6 +12,9 @@
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
+    <script type="text/javascript" src="js/camera.js"></script>
+    <script type="text/javascript" src="js/contact.js"></script>
+
     <style>
         .winsLabel{
             color:green;
@@ -53,7 +56,7 @@
             <form onsubmit="createPlayer();">
                 <div>
                     <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" required>
+                    <input type="text" name="name" id="name" maxlength="8" required>
                     <label for="phone">Phone:</label>
                     <input type="tel" name="phone" id="phone" required/>
 
@@ -63,7 +66,7 @@
                         </div>
                 </div>
                     <input type="submit" data-mini="true" value="Save Player">
-                    <input type="submit" data-mini="true" value="Save as Contact">
+                    <input type="submit" data-mini="true" value="Save as Contact" onclick="createPlayerContact();">
             </form>
         </div>
 
