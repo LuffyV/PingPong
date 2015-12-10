@@ -31,11 +31,13 @@
 
 			<div id="player_number">
 				<p style="text-align:center">Select all players' names</p>
-				<input type="text" placeholder="Player 1 Name" id="player1_nameInput">
-				<input type="text" placeholder="Player 2 Name" id="player2_nameInput">
-				<input type="text" placeholder="Player 3 Name" id="player3_nameInput" style="display: none;" data-wrapper-class="ui-custom">
-				<input type="text" placeholder="Player 4 Name" id="player4_nameInput" style="display: none;" data-wrapper-class="ui-custom">
-			</div>
+                <form>
+                    <input type="text" placeholder="Player 1 Name" id="player1_nameInput" maxlength="8">
+                    <input type="text" placeholder="Player 2 Name" id="player2_nameInput" maxlength="8">
+                    <input type="text" placeholder="Player 3 Name" id="player3_nameInput" maxlength="8" style="display: none;" data-wrapper-class="ui-custom">
+                    <input type="text" placeholder="Player 4 Name" id="player4_nameInput" maxlength="8" style="display: none;" data-wrapper-class="ui-custom">
+                </form>
+            </div>
             <br>
             <button data-role="button" onclick="saveNames()">Save & Start</button>
 		</div>
@@ -68,8 +70,8 @@
             <img class="pointrightbutton" src="img/blueplus.png" onclick="onVolumeDownKeyDown();">
             
             <div id="acciones">
-                <button data-role="button" onclick="reiniciarPuntos();">Reiniciar puntos</button>
-                <button data-role="button" onclick="saveSingles();">Terminar y Guardar</button>
+                <button data-role="button" onclick="reiniciarPuntos();">Restart Points</button>
+                <button data-role="button" onclick="saveSingles();">Save & Quit</button>
             </div>
 
         <div data-role="popup" id="options">
@@ -108,8 +110,8 @@
             <img class="pointrightbutton" src="img/blueplus.png" onclick="onVolumeDownKeyDown();">
 
             <div id="acciones">
-                <button data-role="button" onclick="reiniciarPuntos();">Reiniciar puntos</button>
-                <button data-role="button" onclick="saveDoubles();">Terminar y Guardar</button>
+                <button data-role="button" onclick="reiniciarPuntos();">Restart Points</button>
+                <button data-role="button" onclick="saveDoubles();">Save & Quit</button>
             </div>
 
         <div data-role="popup" id="optionsDoubles">

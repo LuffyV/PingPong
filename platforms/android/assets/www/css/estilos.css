@@ -20,6 +20,10 @@ a {
 	color: red;
 }
 
+#listSingle, #listDouble {
+	list-style-type: none;
+}
+
 table {
 	border-collapse: collapse;
 	width: 100%;

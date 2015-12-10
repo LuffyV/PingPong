@@ -37,7 +37,7 @@ function showDoubleMatches(){
             var size = results.rows.length;
             for(var i=0; i<size; i++){
                 var item = results.rows.item(i);
-                var element = $('<tr><th>'+item.p1Name+'/'+item.p2Name +'</th><th>'+item.t1Score+' - '+item.t2Score + '</th><th>' + item.p3Name+'/'+item.p4Name +'</th></tr>');
+                var element = $('<tr><th><li>'+item.p1Name+'</li><li>'+item.p2Name +'</li></th><th>'+item.t1Score+' - '+item.t2Score + '</th><th><li>' + item.p3Name+'</li><li>'+item.p4Name +'</li></th></tr>');
                 var table = $('#listDouble');
                 table.append(element);
             }
