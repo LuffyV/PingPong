@@ -26,7 +26,7 @@ function createPlayer(){
         var name=$('#name').val();
         var phone=$('#phone').val();
         var image="default_profile_icon.png";
-        tx.executeSql('INSERT INTO player (id,name,phone,wins,loses,picture) VALUES (NULL, ?,?,"0","0",?)',[name,phone,image]);
+        tx.executeSql('INSERT INTO player (id,name,phone,wins,loses,picture) VALUES (NULL, ?,?,?,?,?)',[name,phone,0,0,image]);
 
     },errorDB);
     alert("success player");
