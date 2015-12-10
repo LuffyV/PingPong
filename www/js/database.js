@@ -33,15 +33,12 @@ function createPlayer(){
 }
 
 function showPlayers(){
-    alert("show Player");
-
     db.transaction(function(tx){
         tx.executeSql('SELECT * FROM player', [], function(tx,results){
             var size = results.rows.length;
-            alert("size: " + size);
             for(var i=0;i<size;i++){
                 var item = results.rows.item(i);
-                var element = $('<li>'+item.name+'</li>');
+                var element = $('<li>'+item.name+'. Stats: ' + item.wins + '-' + item.loses + '</li>');
                 var ul = $('#list');
                 ul.append(element);
             }
