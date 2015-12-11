@@ -28,12 +28,11 @@ function createPlayer(){
         tx.executeSql('INSERT INTO player (id,name,phone,wins,loses,picture) VALUES (NULL, ?,?,?,?,?)',[name,phone,0,0,image]);
 
     },errorDB);
-    alert("success player");
-    window.location.href="players.html";
+    alert("Saved player");
+window.location.href="players.html";
 }
 
 function showPlayers(){
-
     db.transaction(function(tx){
         tx.executeSql('SELECT * FROM player', [], function(tx,results){
             var size = results.rows.length;
