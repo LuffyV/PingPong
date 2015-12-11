@@ -8,41 +8,25 @@ var destinationType;
         }
 
         function onPhotoDataSuccess(imageData){
-
-            /*
-
-             var smallImage = document.getElementById("principal-img");
-             window.localStorage.setItem("photo", mediaFiles[0].fullPath);
-             smallImage.src = mediaFiles[0].fullPath;
-
-             */
-            var smallImage=document.getElementById("imagePlayer");
-            smallImage.src="data:image/jpeg;base64,"+imageData;
-
+           var element=$('#imagePlayer');
+            element.attr("src",imageData);
         }
 
         function onPhotoURISuccess(imageURI){
-            /*
-             var smallImage = document.getElementById("principal-img");
-             var path_image = decodeURIComponent(imageData);
-             if (path_image.indexOf("providers") > -1) {
-             path_image = "content://media/external/images/media/" + path_image.split(":")[2];
-             }
-             window.localStorage.setItem("photo", path_image);
-             smallImage.src = imageData;
-             */
+
             var largeImage=document.getElementById("imagePlayer");
             largeImage.src=imageURI;
 
         }
 
         function onFail(message){
-            alert("Fallo al iniciar la camara"+message);
+            alert("Fail on the uso of the Camera."+message);
         }
 
 
         function capturePhoto(){
-            navigator.camera.getPicture(onPhotoDataSuccess, onFail,{quality:50, destinationType:destinationType.DATA_URL});
+            navigator.camera.getPicture(onPhotoDataSuccess, onFail,{quality:50, destinationType:destinationType.FILE_URI,
+                saveToPhotoAlbum:true});
         }
 
 

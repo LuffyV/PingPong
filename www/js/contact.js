@@ -29,5 +29,5 @@ function onError(contactError) {
 
 
 function onSuccess(contact) {
-    alert("Save Success");
+    alert("Contact Saved Succesfully.");
 }
