@@ -126,7 +126,9 @@ function saveNames(){
         numeroJugadores = 4;
         window.location.href = "game.html#GameDoubles";
     }
+
     start();
+    startAccelerometer();
 }
 
 function revisarPuntos(){

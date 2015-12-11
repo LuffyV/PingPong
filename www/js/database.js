@@ -29,6 +29,7 @@ function createPlayer(){
 
     },errorDB);
     alert("success player");
+    window.location.href="players.html";
 }
 
 function showPlayers(){
@@ -72,9 +73,9 @@ function showPlayer(id){
 }
 
 function deletePlayer(){
-    var idPlayer=$('#idSeePlayer').val();
     db.transaction(function(tx){
-        tx.executeSql('DELETE  FROM player WHERE id = ?', [idPlayer], function(){
+        var idPlayer=$('#idSeePlayer').html();
+        tx.executeSql('DELETE FROM player WHERE id = ?', [idPlayer], function(){
             alert("Player Succesfully Deleted");
             window.location.href="players.html";
         }, errorDB);

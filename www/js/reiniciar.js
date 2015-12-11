@@ -49,8 +49,6 @@ function onSuccessPedometer(acceleration) {
         Math.abs(posicionActualY - posicionAnteriorY) > error) {
 
         reiniciarPuntos();
-        alert("Restarted by the Accelerator");
-
         seMovioX = false;
         seMovioY = false;
     }
