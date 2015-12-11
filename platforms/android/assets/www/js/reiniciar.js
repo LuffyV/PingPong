@@ -49,8 +49,6 @@ function onSuccessPedometer(acceleration) {
         Math.abs(posicionActualY - posicionAnteriorY) > error) {
 
         reiniciarPuntos();
-        alert("se acabo el acelerometro");
-
         seMovioX = false;
         seMovioY = false;
     }
@@ -60,7 +58,7 @@ function onSuccessPedometer(acceleration) {
 
 
 function onErrorPedometer() {
-    alert('Error con el accelerator');
+    alert('Error with the acelerator');
 }
 
 function stopWatchAccelerometer() {

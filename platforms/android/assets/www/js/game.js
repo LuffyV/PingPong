@@ -126,7 +126,9 @@ function saveNames(){
         numeroJugadores = 4;
         window.location.href = "game.html#GameDoubles";
     }
+
     start();
+    startAccelerometer();
 }
 
 function revisarPuntos(){
@@ -135,9 +137,9 @@ function revisarPuntos(){
     }
     if(team1_score >= 11 || team2_score >= 11){
         if(Math.abs(team1_score - team2_score) >= 2){
-            // vibrate();
-            // playBeep();
-            // showAlert();
+            vibrate();
+            playBeep();
+            showAlert();
 
             juegoTerminado = true;
             mostrarGanador();
@@ -278,59 +280,48 @@ function saveSingles(){
         }, errorDB);
 
         alert("The game has been saved successfully");
-        actualizarJugadoresSingles();
+        actualizarGanadorSingles();
     } else {
-        alert("El juego aún no termina!");
+        alert("The game hasn't ended yet!");
     }
 }
 
-function actualizarJugadoresSingles(){
-    alert("Ganador: " + ganador + ". Perdedor: " + perdedor);
-    actualizarGanadorSingles();
-    actualizarPerdedorSingles();
-}
-
 function actualizarGanadorSingles(){
-    alert("actualizarGanadorSingles");
     db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
     db.transaction(function(tx){
             tx.executeSql('SELECT wins FROM player WHERE name=?', [ganador], function(tx, results){
                 var existe = results.rows.length; // si el jugador existe, se obtiene una fila
                 if(existe == 1){
                     var item = results.rows.item(0);
-                    alert("El jugador " +ganador+ " tiene "+ item.wins + " partidas ganadas y se le sumará una..");
                     partidasGanadas = item.wins + 1;
                 } else {
-                    alert("Aún no se ha registrado el ganador, no se guardará su victoria.")
+                    alert("Player: "+ganador+" hasn't been registered yet, this victory will not be saved.");
                 }
             }, errorDB);
     }, errorDB);
 
     db.transaction(function(tx){
         tx.executeSql('UPDATE player set wins=? where name=?;', [partidasGanadas, ganador]);
-        alert("Se actualizaron las ganadas");
     }, errorDB);
+    actualizarPerdedorSingles();
 }
 
 function actualizarPerdedorSingles(){
-    alert("actualizarPerdedorSingles");
     db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
     db.transaction(function(tx){
             tx.executeSql('SELECT loses FROM player WHERE name=?', [perdedor], function(tx, results){
                 var existe = results.rows.length; // si el jugador existe, se obtiene una fila
                 if(existe == 1){
                     var item = results.rows.item(0);
-                    alert("El jugador " +perdedor+ " tiene "+ item.loses + " partidas perdidas y se le sumará una..");
                     partidasPerdidas = item.loses + 1;
                 } else {
-                    alert("Aún no se ha registrado al perdedor, no se guardará su derrota.")
+                    alert("Player: "+perdedor+" hasn't been registered yet, this defeat will not be saved.");
                 }
             }, errorDB);
     }, errorDB);
 
     db.transaction(function(tx){
         tx.executeSql('UPDATE player set loses=? where name=?;', [partidasPerdidas, perdedor]);
-        alert("Se actualizaron las perdidas");
     }, errorDB);
 }
 
@@ -338,20 +329,95 @@ function saveDoubles(){
     if(juegoTerminado){
         if(team1_score > team2_score){
             winner1 = localStorage.player1;
-            winner2 = localStorage.player2;   
+            winner2 = localStorage.player2;
+            loser1 = localStorage.player3;
+            loser2 = localStorage.player4;
         } else {
             winner1 = localStorage.player3;
             winner2 = localStorage.player4;
-        }
+            loser1 = localStorage.player1;
+            loser2 = localStorage.player2;
+       }
         db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
         db.transaction(function(tx){
             tx.executeSql('INSERT INTO matchdouble (id,p1Name,p2Name,p3Name,p4Name,t1Score,t2Score, winner1,winner2) VALUES (NULL,?,?,?,?,?,?,?,?)',[localStorage.player1, localStorage.player2, localStorage.player3, localStorage.player4, team1_score, team2_score, winner1, winner2]);
         }, errorDB);
         alert("The game has been saved successfully");
-        window.location.href = "index.html";
+        actualizarGanadoresDoubles();
     } else {
-        alert("El juego aún no termina!");
+        alert("The game hasn't ended yet!");
     }
+}
+
+function actualizarGanadoresDoubles(){
+    db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
+    db.transaction(function(tx){
+            tx.executeSql('SELECT wins FROM player WHERE name=?', [winner1], function(tx, results){
+                var existe = results.rows.length; // si el jugador existe, se obtiene una fila
+                if(existe == 1){
+                    var item = results.rows.item(0);
+                    partidasGanadas = item.wins + 1;
+                } else {
+                    alert("Player: "+winner1+" hasn't been registered yet, this victory will not be saved.");
+                }
+            }, errorDB);
+    }, errorDB);
+
+    db.transaction(function(tx){
+            tx.executeSql('SELECT wins FROM player WHERE name=?', [winner2], function(tx, results){
+                var existe = results.rows.length; // si el jugador existe, se obtiene una fila
+                if(existe == 1){
+                    var item = results.rows.item(0);
+                    partidasGanadas2 = item.wins + 1;
+                } else {
+                    alert("Player: "+winner2+" hasn't been registered yet, this victory will not be saved.");
+                }
+            }, errorDB);
+    }, errorDB);
+
+    db.transaction(function(tx){
+        tx.executeSql('UPDATE player set wins=? where name=?;', [partidasGanadas, winner1]);
+    }, errorDB);
+
+    db.transaction(function(tx){
+        tx.executeSql('UPDATE player set wins=? where name=?;', [partidasGanadas2, winner2]);
+    }, errorDB);
+    actualizarPerdedoresDoubles();
+}
+
+function actualizarPerdedoresDoubles(){
+    db = window.openDatabase("pingpong", "1.0", "pingpong", 200000);
+    db.transaction(function(tx){
+            tx.executeSql('SELECT loses FROM player WHERE name=?', [loser1], function(tx, results){
+                var existe = results.rows.length; // si el jugador existe, se obtiene una fila
+                if(existe == 1){
+                    var item = results.rows.item(0);
+                    partidasPerdidas = item.loses + 1;
+                } else {
+                    alert("Player: "+loser1+" hasn't been registered yet, this defeat will not be saved.");
+                }
+            }, errorDB);
+    }, errorDB);
+
+    db.transaction(function(tx){
+            tx.executeSql('SELECT loses FROM player WHERE name=?', [loser2], function(tx, results){
+                var existe = results.rows.length; // si el jugador existe, se obtiene una fila
+                if(existe == 1){
+                    var item = results.rows.item(0);
+                    partidasPerdidas2 = item.loses + 1;
+                } else {
+                    alert("Player: "+loser2+" hasn't been registered yet, this defeat will not be saved.");
+                }
+            }, errorDB);
+    }, errorDB);
+
+    db.transaction(function(tx){
+        tx.executeSql('UPDATE player set loses=? where name=?;', [partidasPerdidas, loser1]);
+    }, errorDB);
+
+    db.transaction(function(tx){
+        tx.executeSql('UPDATE player set loses=? where name=?;', [partidasPerdidas2, loser2]);
+    }, errorDB);
 }
 
 function errorDB(err){

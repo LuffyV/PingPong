@@ -12,17 +12,65 @@
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
+    <script type="text/javascript" src="js/camera.js"></script>
+    <script type="text/javascript" src="js/contact.js"></script>
+
     <style>
-        .winsLabel{
+        #winsLabel{
             color:green;
+            font-size: 36px;
+            background-color: #6cbb89;
+            border-radius: 5px;
+            margin-right: 80%;
+            text-align: center;
 
         }
-        .lossLabel{
+        #losesLabel{
             color: red;
+            font-size: 36px;
+            background-color: #bb7474;
+            margin-right: 80%;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #winRate{
+            font-size: 36px;
+            background-color: #8b8d8e;
+            margin-right: 65%;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #idSeePlayer{
+            display: none;
         }
        strong{
           font-size: 16px;
         }
+
+        .itemplayer {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        .itemplayer{
+            display: inline;
+            font-size: 40px;
+            font-family: sans-serif;
+            background-color: #1f1f1f;
+        }
+
+        .image{
+            margin-top: 15px;
+            border-radius: 25px;
+            border: 1px solid #005599;
+
+        }
+        #idSeePlayer{
+            font-size: 30px;
+
+        }
+
     </style>
 </head>
 <body>
@@ -34,11 +82,11 @@
             <a href="#addPlayer" data-icon="plus" class="ui-btn-left" rel="external">Add</a>
         </header>
 
+        <div role="main" class="content" data-role="listview">
+            <ul data-role="listview" id="list">
 
-        <div role="main" class="content">
-           <ul data-role="listview" id="list">
+            </ul>
 
-           </ul>
         </div>
 
 	</section>
@@ -50,20 +98,21 @@
         </header>
 
         <div role="main" class="ui-content">
-            <form onsubmit="createPlayer();">
+            <form onsubmit="createPlayer(); return false;">
                 <div>
                     <label for="name">Name:</label>
-                    <input type="text" name="name" id="name" required>
+                    <input type="text" name="name" id="name" maxlength="8" required>
                     <label for="phone">Phone:</label>
                     <input type="tel" name="phone" id="phone" required/>
 
-                    <img src="img/default_profile_icon.png" style="margin-left: auto;margin-right: auto;display: block;width: 320px;height: 240px;" id="imagePlayer" alt="run"/>
-                        <div style="position: relative; left: 35%; margin-top: 1.2em;">
-                            <a href="#options" class="ui-btn-icon-right" data-role="button" data-icon="camera" data-rel="popup" data-transition="pop" data-inline="true" data-theme="c">Link button</a>
+                    <img src="img/default_profile_icon.png" style="margin-left: auto;margin-right: auto;display: block;width: 180px;height: 180px;" id="imagePlayer" alt="run"/>
+
+                        <div style="position: relative; left: 30%; margin-top: 1.2em;">
+                            <a href="#options" class="ui-btn-icon-right" data-role="button" data-icon="camera" data-rel="popup" data-transition="pop" data-inline="true" data-theme="c">Add Profile Photo</a>
                         </div>
                 </div>
                     <input type="submit" data-mini="true" value="Save Player">
-                    <input type="submit" data-mini="true" value="Save as Contact">
+                    <input type="submit" data-mini="true" value="Save as Contact" onclick="createPlayerContact();">
             </form>
         </div>
 
@@ -74,5 +123,50 @@
             <a href="#" data-role="button" data-rel="back" data-icon="navigation" data-inline="true" data-mini="true" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Libreria</a>
         </div>
 	</section>
+    <section data-role="page" id="seePlayer">
+        <header data-role="header">
+            <h1>
+                <STRONG ID="namePlayer">Abner</STRONG>
+            </h1>
+            <a href="players.html" data-icon="delete" class="ui-btn-right" rel="external">Cerrar</a>
+
+        </header>
+        <div class="content" data-role="content">
+            <p>
+               <strong>
+                   <h2 id="idSeePlayer"></h2>
+               </strong>
+            </p>
+            <p>
+                <img class="images" id="imgSeePlayer" src="img/default_profile_icon.png" alt="" style="margin-left: auto;margin-right: auto;display: block;width: 320px;height: 240px;border-radius: 25px;"/>
+
+            </p>
+            <p>
+               <strong> WINS:<LABEL ID="winsLabel"></LABEL> </strong>
+
+                <strong> Losses:<LABEL ID="losesLabel"></LABEL> </strong>
+
+
+            </p>
+            <p>
+                <strong> WIN RATE:<LABEL ID="winRate"></LABEL> </strong>
+
+            </p>
+            <P>
+            <div style="position: relative; left: 35%; margin-top: 1.2em;">
+                <a href="#optionDelete" class="ui-btn-icon-right" data-role="button" data-icon="delete" data-rel="popup" data-transition="pop" data-inline="true" data-theme="c">Delete</a>
+            </div>
+            </P>
+
+
+        </div>
+        <div data-role="popup" id="optionDelete" data-overlay-theme="b" data-theme="b"style="max-width:400px;">
+            <h3>Delete</h3>
+            <p>Are you sure you want to delete this player?</p>
+            <a href="#" data-role="button" data-rel="back" data-icon="check" data-inline="true" data-mini="true" onclick="deletePlayer();">Yes</a>
+            <a href="#" data-role="button" data-rel="back" data-icon="delete" data-inline="true" data-mini="true">No</a>
+        </div>
+
+    </section>
 </body>
 </html>
